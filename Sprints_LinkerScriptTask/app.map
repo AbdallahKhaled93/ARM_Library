@@ -1,0 +1,110 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000040000 xr
+SRAM             0x0000000020000000 0x0000000000008000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000000000                PROVIDE (_intvecs_base_address = 0x0)
+
+.intvecs        0x0000000000000000        0x8
+ *(.intvecs)
+ .intvecs       0x0000000000000000        0x8 startupCode.o
+                0x0000000000000000                au32VectorTable
+                0x0000000000001000                PROVIDE (sprints_start_address = 0x1000)
+
+.sprints        0x0000000000001000       0x14
+ *(.sprints)
+ .sprints       0x0000000000001000       0x14 app_main.o
+                0x0000000000001000                au32SprintsArray
+
+.text           0x0000000000001014       0xc4
+ CREATE_OBJECT_SYMBOLS
+ *(.text)
+ .text          0x0000000000001014       0x2c app_main.o
+                0x0000000000001014                main
+ .text          0x0000000000001040       0x34 app_2.o
+                0x0000000000001040                vidFunc
+ .text          0x0000000000001074       0x64 startupCode.o
+                0x0000000000001074                ResetHandler
+ *(.text.*)
+
+.glue_7         0x00000000000010d8        0x0
+ .glue_7        0x00000000000010d8        0x0 linker stubs
+
+.glue_7t        0x00000000000010d8        0x0
+ .glue_7t       0x00000000000010d8        0x0 linker stubs
+
+.vfp11_veneer   0x00000000000010d8        0x0
+ .vfp11_veneer  0x00000000000010d8        0x0 linker stubs
+
+.v4_bx          0x00000000000010d8        0x0
+ .v4_bx         0x00000000000010d8        0x0 linker stubs
+
+.iplt           0x00000000000010d8        0x0
+ .iplt          0x00000000000010d8        0x0 app_main.o
+
+.rodata         0x00000000000010d8        0x2
+ *(.rodata)
+ .rodata        0x00000000000010d8        0x2 app_main.o
+                0x00000000000010d8                u16ConstGlobalVar
+ *(.rodata*)
+
+.rel.dyn        0x00000000000010dc        0x0
+ .rel.iplt      0x00000000000010dc        0x0 app_main.o
+
+.data           0x0000000020000000        0x4 load address 0x00000000000010dc
+                0x00000000000010dc                __data_load__ = LOADADDR (.data)
+                0x0000000020000000                __data_start__ = .
+ *(.data)
+ .data          0x0000000020000000        0x2 app_main.o
+                0x0000000020000000                u8InitGLobalVar
+ .data          0x0000000020000002        0x0 app_2.o
+ .data          0x0000000020000002        0x0 startupCode.o
+ *(.data*)
+                0x0000000020000004                . = ALIGN (0x4)
+ *fill*         0x0000000020000002        0x2 
+                0x0000000020000004                __data_end__ = .
+
+.igot.plt       0x0000000020000004        0x0 load address 0x00000000000010e0
+ .igot.plt      0x0000000020000004        0x0 app_main.o
+
+.bss            0x0000000020000004        0x4 load address 0x00000000000010e0
+                0x0000000020000004                __bss_start__ = .
+ *(.shbss)
+ *(.bss)
+ .bss           0x0000000020000004        0x4 app_main.o
+ .bss           0x0000000020000008        0x0 app_2.o
+ .bss           0x0000000020000008        0x0 startupCode.o
+ *(.bss.*)
+ *(COMMON)
+                0x0000000020000008                . = ALIGN (0x4)
+                0x0000000020000008                __bss_end__ = .
+
+.stack          0x0000000020000008        0x0 load address 0x00000000000010e0
+                0x0000000020000008                _stack = .
+                0x0000000020000008                __stack = .
+ *(.stack)
+LOAD app_main.o
+LOAD app_2.o
+LOAD startupCode.o
+OUTPUT(app_output.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x0000000000000000       0x59
+ .comment       0x0000000000000000       0x59 app_main.o
+                                         0x5a (size before relaxing)
+ .comment       0x0000000000000059       0x5a app_2.o
+ .comment       0x0000000000000059       0x5a startupCode.o
+
+.ARM.attributes
+                0x0000000000000000       0x2e
+ .ARM.attributes
+                0x0000000000000000       0x2e app_main.o
+ .ARM.attributes
+                0x000000000000002e       0x2e app_2.o
+ .ARM.attributes
+                0x000000000000005c       0x2e startupCode.o
