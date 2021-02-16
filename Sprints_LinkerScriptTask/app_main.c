@@ -4,9 +4,19 @@ char u8InitGLobalVar = 2;
 static long int u32NonInitStaticGlobalVar; 
 const short int u16ConstGlobalVar = 3;
 
+void executeFromRam(void) __attribute__((section(".flashDrv")));
 
 const char au32SprintsArray[] __attribute__((section(".sprints"))) = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
 
+char bFlashBlocked = 1;
+
+void executeFromRam(void)
+{
+	if(bFlashBlocked)
+	{
+		bFlashBlocked = 0;
+	}
+}
 
 void main(void)
 {
@@ -23,7 +33,8 @@ void main(void)
 	}
 	while(1)
 	{
-	
+		executeFromRam();
+		bFlashBlocked = 1;
 	}
 }
 

@@ -5,6 +5,9 @@ extern unsigned int __data_end__   ;
 extern unsigned int __bss_start__  ;
 extern unsigned int __bss_end__    ;
 extern unsigned int _stack         ;
+extern unsigned int __fls_drv_load__;
+extern unsigned int __fls_drv_start__;
+extern unsigned int __fls_drv_end__;
 
 void ResetHandler(void);
 
@@ -34,6 +37,17 @@ void ResetHandler(void)
   
   
   /*Init .DATA */
+	while(Ptr2sDes< Ptr2eDes)
+	{
+		
+		
+		*(Ptr2sDes++) = *(Ptr2Src++);
+	}
+
+  /*Copy flash driver */
+  *Ptr2Src =  (unsigned int*)&__fls_drv_load__;
+  *Ptr2sDes = (unsigned int*)&__fls_drv_start__;
+  *Ptr2eDes = (unsigned int*)&__fls_drv_end__;
 	while(Ptr2sDes< Ptr2eDes)
 	{
 		

@@ -41,6 +41,15 @@ SECTIONS {
         __data_end__ = .;
     } > SRAM AT> FLASH
 
+    .flashDrv : ALIGN (4) {
+    __fls_drv_load__ = LOADADDR (.flashDrv);
+    __fls_drv_start__ = .;
+    *(.data)
+    *(.data*)
+    . = ALIGN (4);
+    __fls_drv_end__ = .;
+    } > SRAM AT> FLASH
+
     .bss : {
         __bss_start__ = .;
         *(.shbss)
