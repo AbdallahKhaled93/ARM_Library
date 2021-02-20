@@ -45,9 +45,9 @@ void ResetHandler(void)
 	}
 
   /*Copy flash driver */
-  *Ptr2Src =  (unsigned int*)&__fls_drv_load__;
-  *Ptr2sDes = (unsigned int*)&__fls_drv_start__;
-  *Ptr2eDes = (unsigned int*)&__fls_drv_end__;
+  Ptr2Src =  (unsigned int*)&__fls_drv_load__;
+  Ptr2sDes = (unsigned int*)&__fls_drv_start__;
+  Ptr2eDes = (unsigned int*)&__fls_drv_end__;
 	while(Ptr2sDes< Ptr2eDes)
 	{
 		
