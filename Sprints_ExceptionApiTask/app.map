@@ -1,0 +1,132 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000040000 xr
+SRAM             0x0000000020000000 0x0000000000008000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000000000                PROVIDE (_intvecs_base_address = 0x0)
+
+.intvecs        0x0000000000000000       0x40
+ *(.intvecs)
+ .intvecs       0x0000000000000000       0x40 startupCode.o
+                0x0000000000000000                au32VectorTable
+                0x0000000000001000                PROVIDE (sprints_start_address = 0x1000)
+
+.sprints        0x0000000000001000       0x14
+ *(.sprints)
+ .sprints       0x0000000000001000       0x14 app_main.o
+                0x0000000000001000                au32SprintsArray
+
+.text           0x0000000000001018      0x198
+ CREATE_OBJECT_SYMBOLS
+ *(.text)
+ .text          0x0000000000001018       0x54 app_main.o
+                0x0000000000001018                main
+ .text          0x000000000000106c       0x34 app_2.o
+                0x000000000000106c                vidFunc
+ .text          0x00000000000010a0       0x60 Mcu.o
+                0x00000000000010a0                Mcu_EnableException
+                0x00000000000010d0                Mcu_DisableException
+ .text          0x0000000000001100       0xa8 startupCode.o
+                0x0000000000001100                SVCHandler
+                0x0000000000001114                ResetHandler
+ .text.__stub   0x00000000000011a8        0x8 linker stubs
+ *(.text.*)
+
+.glue_7         0x00000000000011b0        0x0
+ .glue_7        0x00000000000011b0        0x0 linker stubs
+
+.glue_7t        0x00000000000011b0        0x0
+ .glue_7t       0x00000000000011b0        0x0 linker stubs
+
+.vfp11_veneer   0x00000000000011b0        0x0
+ .vfp11_veneer  0x00000000000011b0        0x0 linker stubs
+
+.v4_bx          0x00000000000011b0        0x0
+ .v4_bx         0x00000000000011b0        0x0 linker stubs
+
+.iplt           0x00000000000011b0        0x0
+ .iplt          0x00000000000011b0        0x0 app_main.o
+
+.rodata         0x00000000000011b0        0x2
+ *(.rodata)
+ .rodata        0x00000000000011b0        0x2 app_main.o
+                0x00000000000011b0                u16ConstGlobalVar
+ *(.rodata*)
+
+.data           0x0000000020000000        0x4 load address 0x00000000000011b4
+                0x00000000000011b4                __data_load__ = LOADADDR (.data)
+                0x0000000020000000                __data_start__ = .
+ *(.data)
+ .data          0x0000000020000000        0x3 app_main.o
+                0x0000000020000000                u8InitGLobalVar
+                0x0000000020000001                bFlashBlocked
+ .data          0x0000000020000003        0x0 app_2.o
+ .data          0x0000000020000003        0x0 Mcu.o
+ .data          0x0000000020000003        0x0 startupCode.o
+ *(.data*)
+                0x0000000020000004                . = ALIGN (0x4)
+ *fill*         0x0000000020000003        0x1 
+                0x0000000020000004                __data_end__ = .
+
+.igot.plt       0x0000000020000004        0x0 load address 0x00000000000011b8
+ .igot.plt      0x0000000020000004        0x0 app_main.o
+
+.flashDrv       0x0000000020000004       0x20 load address 0x00000000000011b8
+                0x00000000000011b8                __fls_drv_load__ = LOADADDR (.flashDrv)
+                0x0000000020000004                __fls_drv_start__ = .
+ *(.data)
+ *(.data*)
+                0x0000000020000004                . = ALIGN (0x4)
+                0x0000000020000004                __fls_drv_end__ = .
+ .flashDrv      0x0000000020000004       0x20 app_main.o
+                0x0000000020000004                executeFromRam
+
+.rel.dyn        0x0000000020000024        0x0 load address 0x00000000000011d8
+ .rel.iplt      0x0000000020000024        0x0 app_main.o
+
+.bss            0x0000000020000024        0x4 load address 0x00000000000011d8
+                0x0000000020000024                __bss_start__ = .
+ *(.shbss)
+ *(.bss)
+ .bss           0x0000000020000024        0x4 app_main.o
+ .bss           0x0000000020000028        0x0 app_2.o
+ .bss           0x0000000020000028        0x0 Mcu.o
+ .bss           0x0000000020000028        0x0 startupCode.o
+ *(.bss.*)
+ *(COMMON)
+                0x0000000020000028                . = ALIGN (0x4)
+                0x0000000020000028                __bss_end__ = .
+
+.stack          0x0000000020000028        0x0 load address 0x00000000000011d8
+                0x0000000020000028                _stack = .
+                0x0000000020000028                __stack = .
+ *(.stack)
+LOAD app_main.o
+LOAD app_2.o
+LOAD Mcu.o
+LOAD startupCode.o
+OUTPUT(app_output.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x0000000000000000       0x59
+ .comment       0x0000000000000000       0x59 app_main.o
+                                         0x5a (size before relaxing)
+ .comment       0x0000000000000059       0x5a app_2.o
+ .comment       0x0000000000000059       0x5a Mcu.o
+ .comment       0x0000000000000059       0x5a startupCode.o
+
+.ARM.attributes
+                0x0000000000000000       0x2e
+ .ARM.attributes
+                0x0000000000000000       0x2e app_main.o
+ .ARM.attributes
+                0x000000000000002e       0x2e app_2.o
+ .ARM.attributes
+                0x000000000000005c       0x2e Mcu.o
+ .ARM.attributes
+                0x000000000000008a       0x2e startupCode.o
