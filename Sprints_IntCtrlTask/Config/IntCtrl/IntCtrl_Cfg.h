@@ -2,14 +2,14 @@
 
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  <Write File Name>
- *       Module:  -
+ *         File:  IntCtrl_Cfg.h
+ *       Module:  IntCtrl
  *
- *  Description:  <Write File DESCRIPTION here>     
+ *  Description:  header file for IntCtrl preprocessing configuration    
  *  
  *********************************************************************************************************************/
-#ifndef <FILE_NAME_H>
-#define <FILE_NAME_H>
+#ifndef _INTCTRL_CFG_H
+#define _INTCTRL_CFG_H
 
 /**********************************************************************************************************************
  * INCLUDES
@@ -20,6 +20,9 @@
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 
+/* The user should enter the desired number of priority groups, and the subgroups number will be deduced automatically */
+/* Acceptable values are: 8, 4, 2, 1 */
+#define INTCTRL_GRP_PRIO_COUNT         1
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
@@ -44,5 +47,5 @@
 #endif  /* FILE_NAME_H */
 
 /**********************************************************************************************************************
- *  END OF FILE: Std_Types.h
+ *  END OF FILE: IntCtrl_Cfg.h
  *********************************************************************************************************************/
