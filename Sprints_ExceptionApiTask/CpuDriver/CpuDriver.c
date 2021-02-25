@@ -1,14 +1,58 @@
+/**********************************************************************************************************************
+ *  FILE DESCRIPTION
+ *  -----------------------------------------------------------------------------------------------------------------*/
+/**        \file  CpuDriver.c
+ *        \brief  Cpu abstraction
+ *
+ *      \details  Implementation of the cpu driver
+ *
+ *
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  INCLUDES
+ *********************************************************************************************************************/
+
 #include "CpuDriver.h"
 
+/**********************************************************************************************************************
+*  LOCAL MACROS CONSTANT\FUNCTION
+*********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  LOCAL DATA 
+ *********************************************************************************************************************/
 
 /* Keeps track of how many nested critical section are entered */
 static uint8 u8CriticalSectionCounter = 0;
 
-/**
- * Enable exception whether it is programmable or fault exceptions
- * Input : void 
- * Return : void
- * */
+/**********************************************************************************************************************
+ *  GLOBAL DATA
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  LOCAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  LOCAL FUNCTIONS
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL FUNCTIONS
+ *********************************************************************************************************************/
+
+
+/******************************************************************************
+* \Syntax          : void CpuDriver_EnableGlobalInterrupt(void)     
+* \Description     : Enable exception whether it is programmable or fault exceptions                                   
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                    
+* \Parameters (out): None                                                      
+* \Return value:   : void                                    
+*******************************************************************************/
 void CpuDriver_EnableGlobalInterrupt(void)
 {
 
@@ -22,12 +66,16 @@ void CpuDriver_EnableGlobalInterrupt(void)
     __asm("MSR control, R0");
 }
 
-
-/**
- * Disable exception whether it is programmable or fault exceptions
- * Input : void 
- * Return : void
- * */
+/******************************************************************************
+* \Syntax          : void CpuDriver_DisableGlobalInterrupt(void)     
+* \Description     : Disable all exceptions except NMI
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                    
+* \Parameters (out): None                                                      
+* \Return value:   : void                                    
+*******************************************************************************/
 void CpuDriver_DisableGlobalInterrupt(void)
 {
 
@@ -41,23 +89,33 @@ void CpuDriver_DisableGlobalInterrupt(void)
     __asm("MSR control, R0");
 }
 
-
-/**
- * Enter critical section by disabling interrupts
- * Input : void 
- * Return : void
- * */
+/******************************************************************************
+* \Syntax          : void CpuDriver_StartCriticalSection(void)     
+* \Description     : Called before critical section entry to disable NMI
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                    
+* \Parameters (out): None                                                      
+* \Return value:   : void                                    
+*******************************************************************************/
 void CpuDriver_StartCriticalSection(void)
 {
     CpuDriver_DisableGlobalInterrupt();
     u8CriticalSectionCounter++;
 }
 
-/**
- * Exit critical section by enabling interrupts
- * Input : void 
- * Return : void
- * */
+
+/******************************************************************************
+* \Syntax          : void CpuDriver_StopCriticalSection(void)     
+* \Description     : Called at the exit of the critical section to enable exceptions
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                    
+* \Parameters (out): None                                                      
+* \Return value:   : void                                    
+*******************************************************************************/
 void CpuDriver_StopCriticalSection(void)
 {
     u8CriticalSectionCounter--;
@@ -68,3 +126,6 @@ void CpuDriver_StopCriticalSection(void)
         CpuDriver_EnableGlobalInterrupt();
     }
 }
+/**********************************************************************************************************************
+ *  END OF FILE: CpuDriver.c
+ *********************************************************************************************************************/
