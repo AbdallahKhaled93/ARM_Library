@@ -28,7 +28,7 @@
  *  GLOBAL DATA
  *********************************************************************************************************************/
 
-const IntCtrl_ExceptionCfgType  IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT]
+const IntCtrl_ExceptionCfgType  IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT] =
 {
     {INTCTRL_MEM_MNGMNT_FAULT,  0, 0},
     {INTCTRL_BUS_FAULT,         0, 0},
@@ -39,7 +39,7 @@ const IntCtrl_ExceptionCfgType  IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPT
     {INTCTRL_SYS_TICK,          0, 0},
 };
 
-const IntCtrl_ExceptionCfgType  IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS_COUNT]
+const IntCtrl_ExceptionCfgType  IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS_COUNT] = 
 {
     {INTCTRL_GPIO_PORTD,        1, 0},
     {INTCTRL_PWM0_FAULT,        1, 1},
@@ -63,5 +63,5 @@ const IntCtrl_ExceptionCfgType  IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS
 
 
 /**********************************************************************************************************************
- *  END OF FILE: FileName.c
+ *  END OF FILE: IntCtrl_Lcfg.c
  *********************************************************************************************************************/

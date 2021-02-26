@@ -16,6 +16,7 @@
 #include "CortexM4_Registers.h"
 #include "Registers_Ops.h"
 #include "IntCtrl.h"
+#include "CpuDriver.h"
 
 
 /**********************************************************************************************************************
@@ -23,7 +24,7 @@
 *********************************************************************************************************************/
 
 /* APINT */ 
-#define INTCTRL_APINT_KEY            (0xFA050000)
+#define INTCTRL_APINT_KEY            (0x05FA0000)
 #define INTCTRL_PRIGROUP_OFFSET      (0x8)
 
 #define INTCTRL_PRIGROUP_XXX         (0x4)
@@ -79,6 +80,9 @@ void IntCtrl_init(void)
     uint8 u8LoopIndex;
     uint8 u8InterruptBitOffset, u8InterruptRegister, u8CurrentInterruptNumber;
     uint32 u32InterruptPRIxRegisterAddress;
+
+    /* Switch to privilege mode to be able to configure exceptions */
+    CpuDriver_SwitchToPrivilegeMode();
 
 #if !defined(INTCTRL_GRP_PRIO_COUNT)
 #error "INTCTRL_GRP_PRIO_COUNT is missing"
@@ -184,15 +188,15 @@ void IntCtrl_init(void)
 
             /* Set priority group and sub group */
 #if   INTCTRL_GRP_PRIO_COUNT == 8
-            SYSPRI1.BITS.MEM |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionGrp;
+            SYSPRI1.BITS.USAGE |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionGrp;
 #elif INTCTRL_GRP_PRIO_COUNT == 4
-            SYSPRI1.BITS.MEM |= (IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionGrp << 1);
-            SYSPRI1.BITS.MEM |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionSubGrp;
+            SYSPRI1.BITS.USAGE |= (IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionGrp << 1);
+            SYSPRI1.BITS.USAGE |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionSubGrp;
 #elif INTCTRL_GRP_PRIO_COUNT == 2
-            SYSPRI1.BITS.MEM |= (IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionGrp << 2);
-            SYSPRI1.BITS.MEM |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionSubGrp;
+            SYSPRI1.BITS.USAGE |= (IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionGrp << 2);
+            SYSPRI1.BITS.USAGE |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionSubGrp;
 #elif INTCTRL_GRP_PRIO_COUNT == 1
-            SYSPRI1.BITS.MEM |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionSubGrp;
+            SYSPRI1.BITS.USAGE |= IntCtrl_ExceptionsCfg[u8LoopIndex].u8ExceptionSubGrp;
 #else
 #error "Invalid value for INTCTRL_GRP_PRIO_COUNT"
 #endif /* INTCTRL_GRP_PRIO_COUNT */
@@ -286,6 +290,9 @@ void IntCtrl_init(void)
             break;
         }
     }
+
+    /* For safety, go back to user mode */
+    CpuDriver_SwitchToUserMode();
 	
 }
 

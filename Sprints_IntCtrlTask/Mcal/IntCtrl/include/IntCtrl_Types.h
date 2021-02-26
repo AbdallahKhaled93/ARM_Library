@@ -3,9 +3,9 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *         File:  IntCtrl_Types.h
- *       Module:  -
+ *       Module:  IntCtrl
  *
- *  Description:  <Write File DESCRIPTION here>     
+ *  Description:  Data types definition for IntCtrl driver
  *  
  *********************************************************************************************************************/
 #ifndef _INTCTRL_TYPES_H
@@ -49,8 +49,8 @@ typedef enum
     INTCTRL_GPIO_PORTA = 0,
     INTCTRL_GPIO_PORTB,
     INTCTRL_GPIO_PORTC,
-    INTCTRL_GPIO_PORTE,
     INTCTRL_GPIO_PORTD,
+    INTCTRL_GPIO_PORTE,
     INTCTRL_UART0,
     INTCTRL_UART1,
     INTCTRL_SSI0,
@@ -72,11 +72,11 @@ typedef enum
     INTCTRL_TIMER_2A,
     INTCTRL_TIMER_2B,
     INTCTRL_ANALOG_COMPARATOR0,
-    INTCTRL_ANALOG_COMPARATOR0,
+    INTCTRL_ANALOG_COMPARATOR1,
     INTCTRL_SYSTEM_CTRL = 28,
     INTCTRL_FLASH_MEMORY_CTRL,
     INTCTRL_GPIO_PORTF,
-    INTCTRL_UART1 = 33,
+    INTCTRL_UART2 = 33,
     INTCTRL_SSI1,
     INTCTRL_TIMER_3A,
     INTCTRL_TIMER_3B,
@@ -120,7 +120,6 @@ typedef enum
     INTCTRL_TIMER_5B_64,
     INTCTRL_SYS_EXCP,
     INTCTRL_PWM1_GEN0 = 134,
-    INTCTRL_PWM1_GEN0,
     INTCTRL_PWM1_GEN1,
     INTCTRL_PWM1_GEN2,
     INTCTRL_PWM1_GEN3,

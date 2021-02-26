@@ -13,6 +13,8 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
+#include "IntCtrl.h"
+#include "CpuDriver.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -39,23 +41,22 @@
  *********************************************************************************************************************/
 
 
-/******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)        
-* \Description     : Describe this service                                    
-*                                                                             
-* \Sync\Async      : Synchronous                                               
-* \Reentrancy      : Non Reentrant                                             
-* \Parameters (in) : parameterName   Parameter Describtion                     
-* \Parameters (out): None                                                      
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK                                  
-*******************************************************************************/
 int main(void)
 {
 	
-    while(1);
-	
-    return 0;
+    volatile char counter = 0;
+
+    IntCtrl_init();
+
+    CpuDriver_DisableGlobalInterrupt();
+    CpuDriver_EnableGlobalInterrupt();
+
+
+    while(1)
+    {
+        counter++;
+    }
+	return 0;
 }
 
 /**********************************************************************************************************************

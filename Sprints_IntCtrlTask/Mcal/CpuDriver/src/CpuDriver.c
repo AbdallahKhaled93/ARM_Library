@@ -55,15 +55,10 @@ static uint8 u8CriticalSectionCounter = 0;
 *******************************************************************************/
 void CpuDriver_EnableGlobalInterrupt(void)
 {
-
-    /* Trigger exception to go to handler mode in order to go to privilege mode */
-    __asm("svc #0");
     __asm("CPSIE i");
-    __asm("CPSIE f");
 
     /* go to user mode */
-    __asm("MOV R0, #0x1");
-    __asm("MSR control, R0");
+    CpuDriver_SwitchToUserMode();
 }
 
 /******************************************************************************
@@ -82,11 +77,7 @@ void CpuDriver_DisableGlobalInterrupt(void)
     /* Trigger exception to go to handler mode in order to go to privilege mode */
     __asm("svc #0");
     __asm("CPSID i");
-    __asm("CPSID f");
 
-    /* go to user mode */
-    __asm("MOV R0, #0x1");
-    __asm("MSR control, R0");
 }
 
 /******************************************************************************
@@ -126,6 +117,64 @@ void CpuDriver_StopCriticalSection(void)
         CpuDriver_EnableGlobalInterrupt();
     }
 }
+
+/******************************************************************************
+* \Syntax          : void CpuDriver_SwitchToPrivilegeMode(void)
+* \Description     : Triggers SVC to go to privilege mode
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                    
+* \Parameters (out): None                                                      
+* \Return value:   : void                                    
+*******************************************************************************/
+void CpuDriver_SwitchToPrivilegeMode(void)
+{
+    /* Trigger exception to go to handler mode in order to go to privilege mode */
+    __asm("svc #0");
+}
+
+/******************************************************************************
+* \Syntax          : void CpuDriver_SwitchToUserMode(void)
+* \Description     : switch back to user mode (unprivileged)
+*
+* \Sync\Async      : Synchronous
+* \Reentrancy      : Non Reentrant
+* \Parameters (in) : None
+* \Parameters (out): None
+* \Return value:   : void
+*******************************************************************************/
+void CpuDriver_SwitchToUserMode(void)
+{
+    __asm("PUSH {R5}");
+    // Go to user mode
+    __asm("MOV R5, #0x1");
+    __asm("MSR control, R5");
+
+    __asm("POP {R5}");
+}
+
+/******************************************************************************
+* \Syntax          : void CpuDriver_SVCHandler(void)
+* \Description     : System handler for SVC exception
+*
+* \Sync\Async      : Synchronous
+* \Reentrancy      : Non Reentrant
+* \Parameters (in) : None
+* \Parameters (out): None
+* \Return value:   : void
+*******************************************************************************/
+void CpuDriver_SVCHandler(void)
+{
+    __asm("PUSH {R5}");
+    // Go to privilege mode
+    __asm("MOV R5, #0x0");
+    __asm("MSR control, R5");
+
+    __asm("POP {R5}");
+}
+
+
 /**********************************************************************************************************************
  *  END OF FILE: CpuDriver.c
  *********************************************************************************************************************/

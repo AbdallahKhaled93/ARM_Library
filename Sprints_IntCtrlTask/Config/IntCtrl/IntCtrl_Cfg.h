@@ -42,8 +42,8 @@
  *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
 
-extern IntCtrl_ExceptionCfgType IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT];
-extern IntCtrl_ExceptionCfgType IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS_COUNT];
+extern const IntCtrl_ExceptionCfgType IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT];
+extern const IntCtrl_ExceptionCfgType IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS_COUNT];
  
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
