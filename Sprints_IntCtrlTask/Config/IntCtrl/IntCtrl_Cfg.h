@@ -22,7 +22,11 @@
 
 /* The user should enter the desired number of priority groups, and the subgroups number will be deduced automatically */
 /* Acceptable values are: 8, 4, 2, 1 */
-#define INTCTRL_GRP_PRIO_COUNT         1
+#define INTCTRL_GRP_PRIO_COUNT                  2
+
+/*  Number of configured system interrupts and MCU peripherals interrupts */
+#define INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT    7
+#define INTCTRL_ENABLED_INTERRUPTS_COUNT        4
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
@@ -38,6 +42,8 @@
  *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
 
+extern IntCtrl_ExceptionCfgType IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT];
+extern IntCtrl_ExceptionCfgType IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS_COUNT];
  
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES

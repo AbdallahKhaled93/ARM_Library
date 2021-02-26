@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "intctrl.h": "c",
+        "intctrl_types.h": "c",
+        "cortexm4_registers.h": "c",
+        "registers_ops.h": "c"
+    }
+}
