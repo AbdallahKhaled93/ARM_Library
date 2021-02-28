@@ -131,6 +131,13 @@ typedef struct
     IntCtrl_InterruptType u8ExceptionNum;
     uint8 u8ExceptionGrp;
     uint8 u8ExceptionSubGrp;
+}IntCtrl_InterruptCfgType;
+
+typedef struct 
+{
+    IntCtrl_SysExceptionType u8ExceptionNum;
+    uint8 u8ExceptionGrp;
+    uint8 u8ExceptionSubGrp;
 }IntCtrl_ExceptionCfgType;
 
 

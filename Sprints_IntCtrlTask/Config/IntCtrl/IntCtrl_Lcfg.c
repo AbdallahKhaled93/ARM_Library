@@ -28,8 +28,11 @@
  *  GLOBAL DATA
  *********************************************************************************************************************/
 
-const IntCtrl_ExceptionCfgType  IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT] =
+
+/* Please use the exception and interrupts numbers in IntCtrl_SysExceptionType enum  */
+const IntCtrl_InterruptCfgType  IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPTIONS_COUNT] =
 {
+    /* Interrupt number, group, sub group */
     {INTCTRL_MEM_MNGMNT_FAULT,  0, 0},
     {INTCTRL_BUS_FAULT,         0, 0},
     {INTCTRL_USAGE_FAULT,       0, 0},
@@ -39,8 +42,10 @@ const IntCtrl_ExceptionCfgType  IntCtrl_ExceptionsCfg[INTCTRL_ENABLED_SYS_EXCEPT
     {INTCTRL_SYS_TICK,          0, 0},
 };
 
+/* Please use the exception and interrupts numbers in IntCtrl_InterruptType enum  */
 const IntCtrl_ExceptionCfgType  IntCtrl_InterruptsCfg[INTCTRL_ENABLED_INTERRUPTS_COUNT] = 
 {
+    /* Interrupt number, group, sub group */
     {INTCTRL_GPIO_PORTD,        1, 0},
     {INTCTRL_PWM0_FAULT,        1, 1},
     {INTCTRL_QEI0,              1, 2},
