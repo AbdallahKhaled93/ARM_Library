@@ -3,6 +3,7 @@
         "intctrl.h": "c",
         "intctrl_types.h": "c",
         "cortexm4_registers.h": "c",
-        "registers_ops.h": "c"
+        "registers_ops.h": "c",
+        "tm4c123gh6pm_registers.h": "c"
     }
 }

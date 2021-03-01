@@ -2,19 +2,20 @@
 
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  <Write File Name>
- *       Module:  -
+ *         File:  Mcu_Types.h
+ *       Module:  Mcu
  *
- *  Description:  <Write File DESCRIPTION here>     
+ *  Description:  Header file for Mcu driver types   
  *  
  *********************************************************************************************************************/
-#ifndef <FILE_NAME_H>
-#define <FILE_NAME_H>
+#ifndef _MCU_TYPES_h
+#define _MCU_TYPES_h
 
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
 
+#include "Std_Types.h"
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
@@ -30,6 +31,25 @@
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 
+#define MCU_RESET_CAUSE_EXTERNAL       (0x1)
+#define MCU_RESET_CAUSE_POWER_ON       (0x2)
+#define MCU_RESET_CAUSE_BROWN_OUT      (0x4)
+#define MCU_RESET_CAUSE_WATCHDOG0      (0x8)
+#define MCU_RESET_CAUSE_SOFTWARE       (0x10)
+#define MCU_RESET_CAUSE_WATCHDOG1      (0X20)
+#define MCU_RESET_CAUSE_MAIN_OSC_FAIL  (0x10000)
+
+typedef uint32 Mcu_RawResetType;
+
+
+typedef struct
+{
+    uint8 u8ClockSource;
+    bool bUsePll;
+    uint32 u32FreqKHZ;
+
+}Mcu_ConfigType;
+
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
@@ -41,8 +61,8 @@
  *********************************************************************************************************************/
 
  
-#endif  /* FILE_NAME_H */
+#endif  /* _MCU_TYPES_h */
 
 /**********************************************************************************************************************
- *  END OF FILE: Std_Types.h
+ *  END OF FILE: Mcu_Types.h
  *********************************************************************************************************************/

@@ -99,7 +99,7 @@ typedef union
     SYSHNDCTRL_BF BITS;
 }SYSHNDCTRL_U;
 
-
+#define APINT_KEY                         (0x05FA0000)
 #define APINT                             (*((volatile uint32*)(SYS_PERIPHERALS_BASE_ADDR + 0xD0C)))
 #define SYSPRI1                           (*((volatile SYSPRI1_U*)(SYS_PERIPHERALS_BASE_ADDR + 0xD18)))
 #define SYSPRI2                           (*((volatile SYSPRI2_U*)(SYS_PERIPHERALS_BASE_ADDR + 0xD1C)))
@@ -127,6 +127,7 @@ typedef union
 
 
 #define STCTRL                           (*((volatile STCTRL_U*)(SYS_PERIPHERALS_BASE_ADDR + 0x010)))
+
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
