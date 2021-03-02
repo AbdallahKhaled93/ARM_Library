@@ -140,6 +140,7 @@ static void configureSystemClock(Mcu_ClockType u8ClockSetting)
         }
 
         RCC.BITS.SYSDIV = ((float)u16OscilatorSrcFreq / (float)MCU_KHZ_TO_MHZ(pstrMcuConfig[u8ClockSetting].u32FreqKHZ)) - 1;
+        RCC.BITS.USESYSDIV = 1;
     }
 
     /* if main oscilator is chosen, enable it*/
