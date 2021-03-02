@@ -5,7 +5,7 @@
  *         File:  TM4C123GH6PM_Registers.h
  *       Module:  common
  *
- *  Description:  Register description file for TivaC board TM4C123GH6PM
+ *  Description:  Register description file for TI microcontroller TM4C123GH6PM
  *  
  *********************************************************************************************************************/
 #ifndef _TM4C123GH6PM_REGISTERS_H
@@ -24,7 +24,71 @@
 #define SYSTEM_CONTROL_BASE_ADDR             (0x400FE000)
 
 
+typedef struct
+{
+    uint32 MOSCDIS     : 1;
+    uint32             : 3;
+    uint32 OSCSRC      : 2;
+    uint32 XTAL        : 5;
+    uint32 BYPASS      : 1;
+    uint32             : 1;
+    uint32 PWRDN       : 1;
+    uint32             : 3;
+    uint32 PWMDIV      : 3;
+    uint32 USEPWMDIV   : 1;
+    uint32             : 1;
+    uint32 USESYSDIV   : 1;
+    uint32 SYSDIV      : 4;
+    uint32 ACG         : 1;
+    uint32             : 4;
+}RCC_BF;
+
+typedef union
+{
+    uint32 VALUE;
+    RCC_BF BITS;
+}RCC_U;
+
+typedef struct
+{
+    uint32            : 4;
+    uint32 OSCSRC2    : 3;
+    uint32            : 4;
+    uint32 BYPASS2    : 1;
+    uint32            : 1;
+    uint32 PWRDN2     : 1;
+    uint32 USBPWRDN   : 1;
+    uint32            : 7;
+    uint32 SYSDIV2LSB : 1;
+    uint32 SYSDIV2    : 6;
+    uint32            : 1;
+    uint32 DIV400     : 1;
+    uint32 USERCC2    : 1;
+}RCC2_BF;
+
+typedef union
+{
+    uint32 VALUE;
+    RCC2_BF BITS;
+}RCC2_U;
+
+typedef struct
+{
+    uint32 LOCK    : 1;
+    uint32         : 31;
+}PLLSTAT_BF;
+
+typedef union
+{
+    uint32 VALUE;
+    PLLSTAT_BF BITS;
+}PLLSTAT_U;
+
+
 #define RESC                                 (*((volatile uint32*)(SYSTEM_CONTROL_BASE_ADDR + 0x05C)))
+#define RCC                                  (*((volatile RCC_U*)(SYSTEM_CONTROL_BASE_ADDR + 0x060)))
+#define RCC2                                 (*((volatile RCC2_U*)(SYSTEM_CONTROL_BASE_ADDR + 0x070)))
+#define PLLSTAT                              (*((volatile PLLSTAT_U*)(SYSTEM_CONTROL_BASE_ADDR + 0x168)))
 
 
 
