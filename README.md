@@ -7,3 +7,4 @@ The folder stucture is as follows and it will updated with every change : <br />
 **Sprints_ExceptionApiTask** : It contains the solution of the second task. First version of the CpuDriver. <br /> 
 **Sprints_IntCtrlTask** : It contains the implementation of IntCtrl driver task. <br /> 
 **Sprints_McuTask** : It contains the implemenation of the MCU driver task. <br /> 
+**Sprints_GpioTask** : It contains the implemenation of the Dio and port drivers task. <br /> 
