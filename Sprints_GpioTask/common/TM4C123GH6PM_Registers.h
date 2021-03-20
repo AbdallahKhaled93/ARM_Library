@@ -21,6 +21,7 @@
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 
+/* system control */
 #define SYSTEM_CONTROL_BASE_ADDR             (0x400FE000)
 
 
@@ -90,6 +91,31 @@ typedef union
 #define RCC2                                 (*((volatile RCC2_U*)(SYSTEM_CONTROL_BASE_ADDR + 0x070)))
 #define PLLSTAT                              (*((volatile PLLSTAT_U*)(SYSTEM_CONTROL_BASE_ADDR + 0x168)))
 
+/* gpio */
+#define GPIODATA(portBaseAddr)               (*((volatile uint32*)(portBaseAddr)))
+#define GPIODIR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x400)))
+#define GPIOIS(portBaseAddr)                 (*((volatile uint32*)(portBaseAddr + 0x404)))
+#define GPIOIBE(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x408)))
+#define GPIOIVE(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x40C)))
+#define GPIOIM(portBaseAddr)                 (*((volatile uint32*)(portBaseAddr + 0x410)))
+#define GPIORIS(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x414)))
+#define GPIOMIS(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x418)))
+#define GPIOICR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x41C)))
+#define GPIOAFSEL(portBaseAddr)              (*((volatile uint32*)(portBaseAddr + 0x420)))
+#define GPIOR2R(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x500)))
+#define GPIOR4R(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x504)))
+#define GPIOR8R(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x508)))
+#define GPIOODR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x50C)))
+#define GPIOPUR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x510)))
+#define GPIOPDR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x514)))
+#define GPIOSLR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x518)))
+#define GPIODEN(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x51C)))
+#define GPIOLOCK(portBaseAddr)               (*((volatile uint32*)(portBaseAddr + 0x520)))
+#define GPIOCR(portBaseAddr)                 (*((volatile uint32*)(portBaseAddr + 0x524)))
+#define GPIOAMSEL(portBaseAddr)              (*((volatile uint32*)(portBaseAddr + 0x528)))
+#define GPIOPCTL(portBaseAddr)               (*((volatile uint32*)(portBaseAddr + 0x52C)))
+#define GPIOADCCTL(portBaseAddr)             (*((volatile uint32*)(portBaseAddr + 0x530)))
+#define GPIODMACTL(portBaseAddr)             (*((volatile uint32*)(portBaseAddr + 0x534)))
 
 
 /**********************************************************************************************************************
