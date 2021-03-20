@@ -92,7 +92,8 @@ typedef union
 #define PLLSTAT                              (*((volatile PLLSTAT_U*)(SYSTEM_CONTROL_BASE_ADDR + 0x168)))
 
 /* gpio */
-#define GPIODATA(portBaseAddr)               (*((volatile uint32*)(portBaseAddr)))
+#define GPIOHBCTL                            (*((volatile uint32*)(SYSTEM_CONTROL_BASE_ADDR + 0x06C)))
+#define GPIODATA(portBaseAddr, addressLine)  (*((volatile uint32*)(portBaseAddr + addressLine)))
 #define GPIODIR(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x400)))
 #define GPIOIS(portBaseAddr)                 (*((volatile uint32*)(portBaseAddr + 0x404)))
 #define GPIOIBE(portBaseAddr)                (*((volatile uint32*)(portBaseAddr + 0x408)))

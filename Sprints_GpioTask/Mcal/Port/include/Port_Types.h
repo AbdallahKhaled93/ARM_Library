@@ -257,7 +257,7 @@ typedef uint16 Port_PinModeType;
 typedef enum
 {
     PORT_DIR_INPUT = 0,
-    PORT_DIR_OUTPUT = 0,
+    PORT_DIR_OUTPUT,
 
 }Port_PinDirectionType;
 

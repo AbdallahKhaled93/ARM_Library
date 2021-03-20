@@ -21,7 +21,7 @@
  *********************************************************************************************************************/
 
 /* Mandatory constant that contains the size of the clock config array */
-#define MCU_ENABLED_PERIPHERALS_CONFIG_ARRAY_SIZE         5
+#define MCU_ENABLED_PERIPHERALS_CONFIG_ARRAY_SIZE         10
 
 /* Mandatory constant that contains the size of the clock config array */
 #define MCU_CLK_CONFIG_ARRAY_SIZE         2
