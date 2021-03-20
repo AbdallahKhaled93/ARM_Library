@@ -75,7 +75,7 @@ Dio_LevelType Dio_ReadChannel (Dio_ChannelType ChannelId)
     u8PortNumber = ChannelId / 8;
     u8PinPosition = ChannelId % 8;
     /* calculate the corresponding address line to the pin*/
-    u8AddressLine = 1 << (u8PinPosition + 1);
+    u8AddressLine = (1 << u8PinPosition) << 2;
 
     /* Read port through the mask */
     u32RawPinLevel = GPIODATA(GET_PORT_BASE_ADDR(u8PortNumber), u8AddressLine);
@@ -103,7 +103,7 @@ void Dio_WriteChannel (Dio_ChannelType ChannelId, Dio_LevelType Level)
     u8PortNumber = ChannelId / 8;
     u8PinPosition = ChannelId % 8;
     /* calculate the corresponding address line to the pin*/
-    u8AddressLine = 1 << (u8PinPosition + 1);
+    u8AddressLine = (1 << u8PinPosition) << 2;    
 
     /* write value through the mask */
     GPIODATA(GET_PORT_BASE_ADDR(u8PortNumber), u8AddressLine) = Level << u8PinPosition;
@@ -122,7 +122,7 @@ void Dio_WriteChannel (Dio_ChannelType ChannelId, Dio_LevelType Level)
 Dio_PortLevelType Dio_ReadPort (Dio_PortType PortId)
 {
     /* Here the whole port is read, so the last address line is read to return tha value of all pins */
-    return GPIODATA(GET_PORT_BASE_ADDR(PortId), 0xFF);
+    return GPIODATA(GET_PORT_BASE_ADDR(PortId), 0x3FC);
 }
 
 /******************************************************************************
@@ -139,7 +139,7 @@ Dio_PortLevelType Dio_ReadPort (Dio_PortType PortId)
 void Dio_WritePort (Dio_PortType PortId, Dio_PortLevelType Level)
 {
     /* Here the whole port is written, so the last address line is used to pass all pin values */
-    GPIODATA(GET_PORT_BASE_ADDR(PortId), 0xFF) = Level;
+    GPIODATA(GET_PORT_BASE_ADDR(PortId), 0x3FC) = Level;
 }
 
 /******************************************************************************
@@ -161,7 +161,7 @@ void Dio_FlipChannel (Dio_ChannelType ChannelId)
     u8PortNumber = ChannelId / 8;
     u8PinPosition = ChannelId % 8;
     /* calculate the corresponding address line to the pin*/
-    u8AddressLine = 1 << (u8PinPosition + 1);
+    u8AddressLine = (1 << u8PinPosition) << 2;
 
     /* flip the value value through the mask */
     FLIP_BIT(GPIODATA(GET_PORT_BASE_ADDR(u8PortNumber), u8AddressLine), u8PinPosition);

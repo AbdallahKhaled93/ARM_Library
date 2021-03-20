@@ -14,7 +14,9 @@
  *********************************************************************************************************************/
 #include "Std_Types.h"
 #include "IntCtrl.h"
-#include "CpuDriver.h"
+#include "Mcu.h"
+#include "Port.h"
+#include "Dio.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -27,6 +29,8 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
+
+extern const Port_ConfigType Port_PinConfig[];
 
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
@@ -48,8 +52,10 @@ int main(void)
 
     IntCtrl_init();
 
-    CpuDriver_DisableGlobalInterrupt();
-    CpuDriver_EnableGlobalInterrupt();
+    Mcu_Init();
+    Mcu_InitClock();
+
+    Port_Init(Port_PinConfig);
 
 
     while(1)
