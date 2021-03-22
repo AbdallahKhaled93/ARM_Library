@@ -71,25 +71,25 @@ void Port_Init()
 
     for(u8LoopIndex = 0; u8LoopIndex < PORT_PIN_CFG_SIZE; u8LoopIndex++)
     {
-        u8PortNumber = Port_PinConfig[u8LoopIndex].pin / 8;
-        u8PinPosition = Port_PinConfig[u8LoopIndex].pin % 8;
+        u8PortNumber = Port_PinConfig[u8LoopIndex].u8Pin / 8;
+        u8PinPosition = Port_PinConfig[u8LoopIndex].u8Pin % 8;
 
         /* Configure pin direction */
-        if(PORT_DIR_OUTPUT == Port_PinConfig[u8LoopIndex].pinDirection)
+        if(PORT_DIR_OUTPUT == Port_PinConfig[u8LoopIndex].u8PinDirection)
         {
             SET_BIT(GPIODIR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
         }
-        else if(PORT_DIR_INPUT == Port_PinConfig[u8LoopIndex].pinDirection)
+        else if(PORT_DIR_INPUT == Port_PinConfig[u8LoopIndex].u8PinDirection)
         {
             CLR_BIT(GPIODIR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
         }
 
         /* Configure port mode */
-        if(PORT_PIN_MODE_DIO != Port_PinConfig[u8LoopIndex].pinMode)
+        if(PORT_PIN_MODE_DIO != Port_PinConfig[u8LoopIndex].u8PinMode)
         {
             SET_BIT(GPIOAFSEL(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             GPIOPCTL(GET_PORT_BASE_ADDR(u8PortNumber)) =  GPIOPCTL(GET_PORT_BASE_ADDR(u8PortNumber)) | 
-                                                                (Port_PinConfig[u8LoopIndex].pinMode << (4 * u8PinPosition));
+                                                                (Port_PinConfig[u8LoopIndex].u8PinMode << (4 * u8PinPosition));
         }
         else
         {
@@ -97,7 +97,7 @@ void Port_Init()
         }
 
         /* Set current */
-        switch (Port_PinConfig[u8LoopIndex].pinCurrent)
+        switch (Port_PinConfig[u8LoopIndex].u8PinCurrent)
         {
         case PORT_PIN_2mA:
             SET_BIT(GPIOR2R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
@@ -114,7 +114,7 @@ void Port_Init()
         }
 
         /* Set attach mode */
-        switch (Port_PinConfig[u8LoopIndex].pinAttach)
+        switch (Port_PinConfig[u8LoopIndex].u8PinAttach)
         {
         case PORT_ATTACH_PULLUP:
             SET_BIT(GPIOPUR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);

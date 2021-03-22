@@ -280,11 +280,11 @@ typedef enum
 
 typedef struct
 {
-    Port_PinType pin;
-    Port_PinModeType pinMode;
-    Port_PinDirectionType pinDirection;
-    Port_PinInternalAttachType pinAttach;
-    Port_PinOutputCurrentType pinCurrent;
+    Port_PinType u8Pin;
+    Port_PinModeType u8PinMode;
+    Port_PinDirectionType u8PinDirection;
+    Port_PinInternalAttachType u8PinAttach;
+    Port_PinOutputCurrentType u8PinCurrent;
 }Port_ConfigType;
 
 
