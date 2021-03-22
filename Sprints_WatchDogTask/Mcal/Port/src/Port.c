@@ -54,12 +54,12 @@ static const uint32 PORT_BASE_ADDRESS[] = {
 
 
 /******************************************************************************
-* \Syntax          : void Port_Init (const Port_ConfigType* ConfigPtr)       
+* \Syntax          : void Port_Init (void)       
 * \Description     : This function intialize the GPIO module                                   
 *                                                                             
 * \Sync\Async      : Synchronous                                               
 * \Reentrancy      : Non Reentrant                                             
-* \Parameters (in) : ConfigPtr array of pin configuration                     
+* \Parameters (in) : None                  
 * \Parameters (out): None                                                      
 * \Return value:   : None                                
 *******************************************************************************/

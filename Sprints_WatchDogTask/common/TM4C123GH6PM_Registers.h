@@ -119,6 +119,25 @@ typedef union
 #define GPIODMACTL(portBaseAddr)             (*((volatile uint32*)(portBaseAddr + 0x534)))
 
 
+/* WDT */
+typedef struct
+{
+    uint32 INTEN   : 1;
+    uint32 RESEN   : 1;
+    uint32 INTTYPE : 1;
+    uint32         : 28;
+    uint32 WRC     : 1;
+}WDTCTL_BF;
+
+typedef union
+{
+    uint32 VALUE;
+    WDTCTL_BF BITS;
+}WDTCTL_U;
+
+#define WDTLOAD(wdgBaseAddr)                 (*((volatile uint32*)(wdgBaseAddr)))
+#define WDTCTL(wdgBaseAddr)                  (*((volatile WDTCTL_U*)(wdgBaseAddr + 0x008)))
+
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
