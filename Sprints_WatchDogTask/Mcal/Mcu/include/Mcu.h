@@ -48,6 +48,7 @@ Mcu_PLLStatusType Mcu_GetPLLStatus(void);
 Std_ReturnType Mcu_DistributePLLClock(void);
 Mcu_RawResetType Mcu_GetResetRawValue(void);
 void Mcu_PerformReset(void);
+float Mcu_getTickDuration(void);
  
 #endif  /* _MCU_H */
 

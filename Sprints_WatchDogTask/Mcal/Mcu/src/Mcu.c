@@ -40,6 +40,7 @@
 
 static Mcu_RawResetType u32RawResetCause;
 static Mcu_ConfigType   *pstrMcuConfig = NULL;
+static float Mcu_fCurrentFreq;
 
 /* Values are truncated because only single point precision is supported */
 static float crystalFreqMapping[MCU_AVAIL_CRYSTAL_FREQS] = {
@@ -198,6 +199,9 @@ Std_ReturnType Mcu_InitClock(Mcu_ClockType u8ClockSetting)
 {
     Std_ReturnType retVal;
 
+    /* Save current system frequency */
+    Mcu_fCurrentFreq = pstrMcuConfig[u8ClockSetting].u32FreqKHZ;
+
     /* Pointer is not initialized */
     if(pstrMcuConfig == NULL)
     {
@@ -300,6 +304,22 @@ void Mcu_PerformReset(void)
 Mcu_RawResetType Mcu_GetResetRawValue(void)
 {
     return u32RawResetCause;
+}
+
+/******************************************************************************
+* \Syntax          : float Mcu_getTickDuration(void)     
+* \Description     : this function returns the duration of the tick depending on the current                                  
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                         
+* \Parameters (out): None                                                      
+* \Return value:   : float  
+*                                                                        
+*******************************************************************************/
+float Mcu_getTickDuration(void)
+{
+    return 1.0/((float)Mcu_fCurrentFreq);
 }
 
 /**********************************************************************************************************************
