@@ -30,6 +30,7 @@
 /* Enabled clock for peripherals */
 const Mcu_EnabledPeripheralClockType Mcu_EnabledPeripheralsConfig[MCU_ENABLED_PERIPHERALS_CONFIG_ARRAY_SIZE] = 
 {
+    MCU_PERIPHERAL_CLOCK_WATCHDOG1,
     MCU_PERIPHERAL_CLOCK_I2C0,
     MCU_PERIPHERAL_CLOCK_WTIMER5,
     MCU_PERIPHERAL_CLOCK_GPIOA,

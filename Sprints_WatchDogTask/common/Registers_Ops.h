@@ -28,10 +28,15 @@
  *********************************************************************************************************************/
 
 /* bit operation of registers (32 bits)*/
-#define SET_BIT(RegAddress, bit)     (*((uint32*)RegAddress) |= (1<<bit))
-#define CLR_BIT(RegAddress, bit)     (*((uint32*)RegAddress) &= ~(1<<bit))
-#define FLIP_BIT(RegAddress, bit)    (*((uint32*)RegAddress) |= (1<<bit))
-#define IS_BIT_SET(RegAddress, bit)  (((*((uint32*)RegAddress)) & (1<<(bit))) >> bit)
+#define SET_BIT_ADDR(RegAddress, bit)     (*((uint32*)RegAddress) |= (1<<bit))
+#define CLR_BIT_ADDR(RegAddress, bit)     (*((uint32*)RegAddress) &= ~(1<<bit))
+#define FLIP_BIT_ADDR(RegAddress, bit)    (*((uint32*)RegAddress) |= (1<<bit))
+#define IS_BIT_SET_ADDR(RegAddress, bit)  (((*((uint32*)RegAddress)) & (1<<(bit))) >> bit)
+
+#define SET_BIT_REG(RegAddress, bit)     (RegAddress |= (1<<bit))
+#define CLR_BIT_REG(RegAddress, bit)     (RegAddress &= ~(1<<bit))
+#define FLIP_BIT_REG(RegAddress, bit)    (RegAddress |= (1<<bit))
+#define IS_BIT_SET_REG(RegAddress, bit)  ((RegAddress & (1<<(bit))) >> bit)
 
 /* get alias for peripheral bit banding */
 #define GET_REGISTER_ALIAS(RegAddress, bit)        (PERIPHERALS_ALIS_BASE_ADDRESS + ((((RegAddress - PERIPHERALS_BASE_ADDRESS)*8) + bit)*4))

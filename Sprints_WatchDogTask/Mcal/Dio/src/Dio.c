@@ -164,7 +164,7 @@ void Dio_FlipChannel (Dio_ChannelType ChannelId)
     u8AddressLine = (1 << u8PinPosition) << 2;
 
     /* flip the value value through the mask */
-    FLIP_BIT(GPIODATA(GET_PORT_BASE_ADDR(u8PortNumber), u8AddressLine), u8PinPosition);
+    FLIP_BIT_REG(GPIODATA(GET_PORT_BASE_ADDR(u8PortNumber), u8AddressLine), u8PinPosition);
 }
 
 /**********************************************************************************************************************

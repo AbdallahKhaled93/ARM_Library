@@ -77,36 +77,36 @@ void Port_Init()
         /* Configure pin direction */
         if(PORT_DIR_OUTPUT == Port_PinConfig[u8LoopIndex].u8PinDirection)
         {
-            SET_BIT(GPIODIR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIODIR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
         }
         else if(PORT_DIR_INPUT == Port_PinConfig[u8LoopIndex].u8PinDirection)
         {
-            CLR_BIT(GPIODIR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            CLR_BIT_REG(GPIODIR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
         }
 
         /* Configure port mode */
         if(PORT_PIN_MODE_DIO != Port_PinConfig[u8LoopIndex].u8PinMode)
         {
-            SET_BIT(GPIOAFSEL(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOAFSEL(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             GPIOPCTL(GET_PORT_BASE_ADDR(u8PortNumber)) =  GPIOPCTL(GET_PORT_BASE_ADDR(u8PortNumber)) | 
                                                                 (Port_PinConfig[u8LoopIndex].u8PinMode << (4 * u8PinPosition));
         }
         else
         {
-            CLR_BIT(GPIOAFSEL(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            CLR_BIT_REG(GPIOAFSEL(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
         }
 
         /* Set current */
         switch (Port_PinConfig[u8LoopIndex].u8PinCurrent)
         {
         case PORT_PIN_2mA:
-            SET_BIT(GPIOR2R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOR2R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             break;
         case PORT_PIN_4mA:
-            SET_BIT(GPIOR4R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOR4R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             break;
         case PORT_PIN_8mA:
-            SET_BIT(GPIOR8R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOR8R(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             break;
         
         default:
@@ -117,13 +117,13 @@ void Port_Init()
         switch (Port_PinConfig[u8LoopIndex].u8PinAttach)
         {
         case PORT_ATTACH_PULLUP:
-            SET_BIT(GPIOPUR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOPUR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             break;
         case PORT_ATTACH_PULLDOWN:
-            SET_BIT(GPIOPDR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOPDR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             break;
         case PORT_ATTACH_OPENDRAIN:
-            SET_BIT(GPIOODR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+            SET_BIT_REG(GPIOODR(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
             break;
         
         default:
@@ -131,7 +131,7 @@ void Port_Init()
         }
 
         /* Enable GPIO digital I/O */
-        SET_BIT(GPIODEN(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
+        SET_BIT_REG(GPIODEN(GET_PORT_BASE_ADDR(u8PortNumber)) , u8PinPosition);
 
     }
 }

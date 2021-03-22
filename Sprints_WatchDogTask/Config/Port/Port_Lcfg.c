@@ -29,10 +29,7 @@
 
 const Port_ConfigType Port_PinConfig[PORT_PIN_CFG_SIZE] = 
 {
-    {PORT_PA0, PORT_PIN_MODE_PA0_U0RX, PORT_DIR_INPUT, PORT_ATTACH_DEFAULT, PORT_PIN_NA},
     {PORT_PF1, PORT_PIN_MODE_DIO, PORT_DIR_OUTPUT, PORT_ATTACH_DEFAULT, PORT_PIN_NA},
-    {PORT_PF0, PORT_PIN_MODE_DIO, PORT_DIR_INPUT, PORT_ATTACH_PULLDOWN, PORT_PIN_NA},
-    {PORT_PB4, PORT_PIN_MODE_PB4_CAN0RX, PORT_DIR_INPUT, PORT_ATTACH_OPENDRAIN, PORT_PIN_NA}
 };
 
 /**********************************************************************************************************************

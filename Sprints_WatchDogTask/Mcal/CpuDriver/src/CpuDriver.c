@@ -55,7 +55,7 @@ static uint8 u8CriticalSectionCounter = 0;
 *******************************************************************************/
 void CpuDriver_EnableGlobalInterrupt(void)
 {
-    __asm("CPSIE i");
+    asm(" CPSIE i");
 
     /* go to user mode */
     CpuDriver_SwitchToUserMode();
@@ -75,8 +75,8 @@ void CpuDriver_DisableGlobalInterrupt(void)
 {
 
     /* Trigger exception to go to handler mode in order to go to privilege mode */
-    __asm("svc #0");
-    __asm("CPSID i");
+    asm(" svc #0");
+    asm(" CPSID i");
 
 }
 
@@ -131,7 +131,7 @@ void CpuDriver_StopCriticalSection(void)
 void CpuDriver_SwitchToPrivilegeMode(void)
 {
     /* Trigger exception to go to handler mode in order to go to privilege mode */
-    __asm("svc #0");
+    asm(" svc #0");
 }
 
 /******************************************************************************
@@ -146,12 +146,12 @@ void CpuDriver_SwitchToPrivilegeMode(void)
 *******************************************************************************/
 void CpuDriver_SwitchToUserMode(void)
 {
-    __asm("PUSH {R5}");
+    asm(" PUSH {R5}");
     // Go to user mode
-    __asm("MOV R5, #0x1");
-    __asm("MSR control, R5");
+    asm(" MOV R5, #0x1");
+    asm(" MSR control, R5");
 
-    __asm("POP {R5}");
+    asm(" POP {R5}");
 }
 
 /******************************************************************************
@@ -166,12 +166,12 @@ void CpuDriver_SwitchToUserMode(void)
 *******************************************************************************/
 void CpuDriver_SVCHandler(void)
 {
-    __asm("PUSH {R5}");
+    asm(" PUSH {R5}");
     // Go to privilege mode
-    __asm("MOV R5, #0x0");
-    __asm("MSR control, R5");
+    asm(" MOV R5, #0x0");
+    asm(" MSR control, R5");
 
-    __asm("POP {R5}");
+    asm(" POP {R5}");
 }
 
 

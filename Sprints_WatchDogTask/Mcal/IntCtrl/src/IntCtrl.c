@@ -108,7 +108,7 @@ void IntCtrl_init(void)
         /* Enable interrupt in ENx register */
         u8InterruptBitOffset = u8CurrentInterruptNumber % INTCTRL_REGISTER_SIZE_BITS;
         u8InterruptRegister = u8CurrentInterruptNumber / INTCTRL_REGISTER_SIZE_BITS;
-        SET_BIT((INTCTRL_ENx_REGISTERS_BASE_ADDR + (u8InterruptRegister * INTCTRL_REGISTER_SIZE_BYTES)), u8InterruptBitOffset);
+        SET_BIT_ADDR((INTCTRL_ENx_REGISTERS_BASE_ADDR + (u8InterruptRegister * INTCTRL_REGISTER_SIZE_BYTES)), u8InterruptBitOffset);
 
         /* Get corresponding PRI register */
         u8InterruptBitOffset = INTCTRL_PRIx_FIRST_USEFUL_BIT + ((u8CurrentInterruptNumber % INTCTRL_INT_COUNT_PER_PRIx) * 8);

@@ -100,7 +100,7 @@ static void enablePeripherals(void)
     {
         u8Offset = Mcu_EnabledPeripheralsConfig[u16LoopIndex] % MCU_RCGCx_REGISTER_SIZE_BITS;
         u8CurrentRCGCx = Mcu_EnabledPeripheralsConfig[u16LoopIndex] / MCU_RCGCx_REGISTER_SIZE_BITS;
-        SET_BIT((MCU_RCGCx_BASE_ADDR + (u8CurrentRCGCx * MCU_RCGCx_REGISTER_SIZE_BYTES)), u8Offset);
+        SET_BIT_ADDR((MCU_RCGCx_BASE_ADDR + (u8CurrentRCGCx * MCU_RCGCx_REGISTER_SIZE_BYTES)), u8Offset);
     }
     
 }
