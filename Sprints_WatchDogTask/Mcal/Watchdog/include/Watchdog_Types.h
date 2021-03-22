@@ -32,6 +32,20 @@
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 
+typedef enum
+{
+    WATCHDOG_INTERRUPT_STANDARD,
+    WATCHDOG_INTERRUPT_NMI
+}Wdg_InterruptType;
+
+typedef struct 
+{
+    void (*ptrfuncWatchdogNotification)(void);
+    Wdg_InterruptType u8InterruptType;
+    uint16 u16InitialTimeout;
+    uint16 u16MaxTimeout;
+}Wdg_ConfigType;
+
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
