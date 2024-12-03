@@ -1,5 +1,5 @@
 # ARM_Library
-This repository is created during the ARM master class course of Sprints.ai school. I intend to centralize all the files and assignments in this repo.
+
 
 
 The folder stucture is as follows and it will updated with every change : <br /> 
